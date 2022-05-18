@@ -13,8 +13,8 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 
-<body onload="loadPokemon()">
-    <div class="pokemon-container">
+<body onload="getAllPokemon()">
+    <div class="pokemon-container d-none">
 
         <div class="info-top-container">
             <img class="pokemon-image" id="pokemon-image">
@@ -38,60 +38,59 @@
             </div>
         </div>
         <!--Pokemon Base Stats-->
-        <div>
+        <div class="base-stats-container">
             <h2>Base Stats</h2>
-
-            <div class="base-stats-container">
+                    <!--Heath Points Stat-->
+            <div class="base-stat">
                 <div class="stats-font">
                 <h5>HP</h5>
                 </div>
                 <div class="progress">
-                    <div class="progress-bar bg-danger" role="progressbar" style="width: 25%" aria-valuenow="25"
+                    <div id="hp-progress-bar" id class="progress-bar bg-danger" role="progressbar" style="width: 50%" aria-valuenow="25"
                         aria-valuemin="0" aria-valuemax="100">
                     </div>
                 </div>
             </div>
-
-            <div class="base-stats-container">
+                    <!--Attack Stat-->
+            <div class="base-stat">
                 <div class="stats-font">
                 <h5>ATK</h5>
                 </div>
                 <div class="progress">
-                    <div class="progress-bar bg-warning" role="progressbar" style="width: 25%" aria-valuenow="25"
+                    <div id="atk-progress-bar" class="progress-bar bg-warning" role="progressbar" style="width: 50%" aria-valuenow="25"
                         aria-valuemin="0" aria-valuemax="100">
                     </div>
                 </div>
             </div>
-
-            <div class="base-stats-container">
+                    <!--Defense Stat-->
+            <div class="base-stat">
                 <div class="stats-font">
                 <h5>DEF</h5>
                 </div>
                 <div class="progress">
-                    <div class="progress-bar " role="progressbar" style="width: 25%" aria-valuenow="25"
+                    <div id="def-progress-bar" class="progress-bar " role="progressbar" style="width: 50%" aria-valuenow="25"
                         aria-valuemin="0" aria-valuemax="100">
                     </div>
                 </div>
             </div>
-
-            <div class="base-stats-container">
+                    <!--Speed Stat-->
+            <div class="base-stat">
                 <div class="stats-font">
                 <h5>SPD</h5>
                 </div>
                 <div class="progress">
-                    <div class="progress-bar bg-stats-spd" role="progressbar" style="width: 25%" aria-valuenow="25"
+                    <div id="spd-progress-bar" class="progress-bar bg-stats-spd" role="progressbar" style="width: 50%" aria-valuenow="25"
                         aria-valuemin="0" aria-valuemax="100">
                     </div>
                 </div>
             </div>
-
-
-            <div class="base-stats-container">
+                    <!--Experience Stat-->
+            <div class="base-stat">
                 <div class="stats-font">
                 <h5>EXP</h5>
                 </div>
                 <div class="progress">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25"
+                    <div id="exp-progress-bar" class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="25"
                         aria-valuemin="0" aria-valuemax="100">
                     </div>
                 </div>
@@ -99,8 +98,23 @@
 
         </div>
     </div>
+            <!--Alle .... Pokemon werden geladen-->
 
+</div>   
+    <div>
+        <div class="pokedex-head">
+            <h1>Pokedex</h1>
+        </div>
+        <div class="dd">
+        </div>
+        <div class="ee">
+            <div class="ff">
+                <b>First 150 Pokemon</b>
+            </div>
+        </div>
+        <div class="ss " id="all-pokemon">
 
+        </div>
     </div>
 </body>
 

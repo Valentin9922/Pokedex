@@ -68,6 +68,10 @@ body{
 }
 
 .base-stats-container{
+    margin-right: 3%;
+}
+
+.base-stat{
  display: flex ;
  align-items: center;
  justify-content: center;
@@ -75,6 +79,9 @@ body{
 
 .stats-font{
     width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
 }
 
 .progress{
@@ -89,4 +96,67 @@ body{
 
 h2{
     text-align: center;
+}
+
+
+.pokemon{
+    background-color: #F2F2F2;
+    width: 200px;
+    height: 200px;
+    margin: 15px;
+    border-radius: 10px;
+    
+
+}
+
+.ss{
+    
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin: 0px 100px 0px 100px;
+    padding-top: 100px;
+    padding-bottom: 100px;
+
+}
+
+.pokedex-head{
+    
+    text-align: center;
+    color: white;
+    height:100px;
+    background-color: #1f1f1f;
+}
+
+.pokedex-head h1{
+    font-size: 80px;
+}
+
+.dd{
+    height: 50px;
+    background-color: #616161;
+    margin: 0px 100px 0px 100px;
+}
+
+.ee{
+    height: 20px;
+    background-color: white;
+    margin: 0px 100px 0px 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ff{
+    height: 100%;
+    background-color: #616161;
+    width: 300px;
+    border-bottom-left-radius: 35em 18em;
+    border-bottom-right-radius: 35em 18em;
+    text-align: center;
+    color: white;
+    line-height: 15px;
+
 }
