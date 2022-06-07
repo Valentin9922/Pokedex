@@ -1,85 +1,125 @@
 
-let FirstPokemonNames = ['bulbasaur', 'ivysaur' , 'venusaur', 'charmander', 'charmeleon', 'Charizard' , 'squirtle' , 'Wartortle' , 'Blastoise' ,
-'caterpie', 'metapod', 'butterfree', 'weedle', 'kakuna', 'Beedrill', 'pidgey', 'pidgeotto', 'pidgeot', 'rattata', 'Raricate',  ];
+let PokemonJson = [];
 
 let allPokemon;
 let Pokemon;
+let PokemonImage;
+async function getAllPokemon() {  //holt alle Pokemon aus dem array
 
-async function getAllPokemon(){
-    
-        let allPkmUrl = 'https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0';
-        let allResponse = await fetch(allPkmUrl);
-        allPokemon = await allResponse.json();
-        console.log(allPokemon);
-        
-        for( let i = 0; i< 25; i++){
-            let onePkmUrl = allPokemon ['results'] [i] ['url']
-            getPokemon(onePkmUrl, i);
-
-        }
-        
+    let allPkmUrl = 'https://pokeapi.co/api/v2/pokemon?limit=1126&offset=0';
+    let allResponse = await fetch(allPkmUrl);
+    allPokemon = await allResponse.json();
+    for (let i = 0; i < 48; i++) {
+        let onePkmUrl = allPokemon['results'][i]['url']
+        await getPokemon(onePkmUrl, i);
     }
-
-    async function getPokemon(onePkmUrl, x){
-        let url = onePkmUrl;
-        let response = await fetch(url);
-        Pokemon = await response.json();
-        console.log(Pokemon);
-        loadAllPokemon(x)
-    }
-
-function loadAllPokemon(x){
-    	
-    let PokemonImages = Pokemon['sprites'][x]['other']['official-artwork']['front_default'];
-    document.getElementById('all-pokemon').src += PokemonImages;
-
-
 }
 
-
-function pokemonInfo(){
-    let PokemonImage = currentPokemon['sprites']['other']['official-artwork']['front_default'];
-    document.getElementById('pokemon-name').innerHTML = currentPokemon['name'];
-    document.getElementById('pokemon-image').src += PokemonImage;
-    document.getElementById('first-pkm-type').innerHTML = `<b>${currentPokemon['types'][0]['type']['name']}</b>`;
-    document.getElementById('pkm-weight').innerHTML = `${currentPokemon['weight']} KG`;
-    document.getElementById('pkm-height').innerHTML = `${currentPokemon['height']} M`;
-    PokemonHPStat();
+async function getPokemon(onePkmUrl, i) {
+    let response = await fetch(onePkmUrl);
+    Pokemon = await response.json();
+    PokemonJson.push(Pokemon);
+    console.log(Pokemon);
+    renderPokemon(i)
 }
 
-function PokemonHPStat(){
-    let pkmHP =  currentPokemon['stats'][0]['base_stat'];
+function renderPokemon(i) {
+    document.getElementById('all-pokemon').innerHTML += /*html*/`   
+    <div onclick="renderPokemonInfoBig(${i})">
+        <div class="pokemon ${i}">
+          <img class="all-pokemon-image" id="pokemon-images ${i}" src="">
+        <div class="pokemon-short-info">
+            <div class="pokemon-number " id="pokemon-number ${i}">
+            </div>
+            <div class="pokemon-names" id="pokemon-names ${i}">
+            </div> 
+            <div id="type${Pokemon['name']}" class="pokemon-types">
+              
+            </div>
+         </div>
+        </div>
+    </div> 
+    `;
+    pokemonInfo(i);
+    renderPokemonTypes();    
+}
+
+function renderPokemonTypes(){
+    for(let i = 0; i< Pokemon['types'].length; i++){
+        document.getElementById(`type${Pokemon['name']}`).innerHTML += `<span class="pkm-type-container ${Pokemon['types'][i]['type']['name']}" >${Pokemon['types'][i]['type']['name']}</span>` 
+    }
+}
+
+function pokemonInfo(i) {
+    for (let p = 0; p < PokemonJson.length; p++) {
+        let PokemonImage = PokemonJson[p]['sprites']['other']['official-artwork']['front_default'];
+        document.getElementById(`pokemon-names ${i}`).innerHTML = `<b> ${PokemonJson[p]['name']}</b>`;
+        document.getElementById(`pokemon-images ${i}`).src = PokemonImage;
+        document.getElementById(`pokemon-number ${i}`).innerHTML = `<b>#0${PokemonJson[p]['id']}</b>`;
+       
+    }
+}
+
+function renderPokemonInfoBig(i) {
+
+    document.getElementById('pokemon-container').classList.remove('d-none');
+    let PokemonImage = PokemonJson[i]['sprites']['other']['official-artwork']['front_default'];
+    document.getElementById('showPokedex').classList.add('d-none');
+    document.getElementById(`pokemon-name`).innerHTML = PokemonJson[i]['name'];
+    document.getElementById(`pokemon-image`).src = PokemonImage;
+    document.getElementById('pkm-type').innerHTML = `<div class="type-onclicked-pkm-container" id="typeOnclickedpkm${PokemonJson[i]['name']}">
+                                                    </div>`
+    document.getElementById('pkm-weight').innerHTML = `${PokemonJson[i]['weight']} KG`;
+    document.getElementById('pkm-height').innerHTML = `${PokemonJson[i]['height']} M`;
+    PokemonHPStat(i);
+    renderPokemonTypesForOnclickedPokemon(i)
+}
+//----------Diese funktion rendert den PokemonTypen vom ausgewähltem Pokemon------------------//
+function renderPokemonTypesForOnclickedPokemon(i){
+     for(let x = 0; x< Pokemon['types'].length; x++){
+        document.getElementById(`typeOnclickedpkm${PokemonJson[i]['name']}`).innerHTML += `<span class="pkm-type-container ${PokemonJson[i]['types'][x]['type']['name']}" >${PokemonJson[i]['types'][x]['type']['name']}</span>` 
+    }
+}
+//---------------Diese Functionen zeigen alle Base Stas des gewählten Pokemon an----------------//
+
+function PokemonHPStat(i) {
+    let pkmHP = PokemonJson[i]['stats'][0]['base_stat'];
     document.getElementById('hp-progress-bar').style = `width: ${pkmHP}px`;
     document.getElementById('hp-progress-bar').innerHTML = `<b>${pkmHP}</b>`;
-    PokemonATKStat();
-    PokemonDEFStat();
-    PokemonSPDStat();
-    PokemonEXPStat();
+    PokemonATKStat(i);
+    PokemonDEFStat(i);
+    PokemonSPDStat(i);
+    PokemonEXPStat(i);
 }
 
-function PokemonATKStat(){
-    let pkmATK =  currentPokemon['stats'][1]['base_stat'];
+function PokemonATKStat(i) {
+    let pkmATK = PokemonJson[i]['stats'][1]['base_stat'];
     document.getElementById('atk-progress-bar').style = `width: ${pkmATK}px`;
     document.getElementById('atk-progress-bar').innerHTML = `<b>${pkmATK}</b>`;
 }
 
-function PokemonDEFStat(){
-    let pkmDEF =  currentPokemon['stats'][2]['base_stat'];
+function PokemonDEFStat(i) {
+    let pkmDEF = PokemonJson[i]['stats'][2]['base_stat'];
     document.getElementById('def-progress-bar').style = `width: ${pkmDEF}px`;
     document.getElementById('def-progress-bar').innerHTML = `<b>${pkmDEF}</b>`;
 }
 
-function PokemonSPDStat(){
-    let pkmSPD =  currentPokemon['stats'][5]['base_stat'];
+function PokemonSPDStat(i) {
+    let pkmSPD = PokemonJson[i]['stats'][5]['base_stat'];
     document.getElementById('spd-progress-bar').style = `width: ${pkmSPD}px`;
     document.getElementById('spd-progress-bar').innerHTML = `<b>${pkmSPD}</b>`;
 }
 
-function PokemonEXPStat(){
-    let pkmEXP =  currentPokemon['base_experience'];
+function PokemonEXPStat(i) {
+    let pkmEXP = PokemonJson[i]['base_experience'];
     let pkmEXPProgress = pkmEXP / 2;
     document.getElementById('exp-progress-bar').style = `width: ${pkmEXPProgress}px`;
     document.getElementById('exp-progress-bar').innerHTML = `<b>${pkmEXP}</b>`;
 }
 
+function backToAllPkm() {
+    document.getElementById('pokemon-container').classList.add('d-none');
+    document.getElementById('showPokedex').classList.remove('d-none');
+
+}
 

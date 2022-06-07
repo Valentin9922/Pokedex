@@ -5,27 +5,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="/src/script.js"></script>
-    <link rel="stylesheet" href="/src/style.css">
+    <title>Mein eigener Pokedex</title>
+    <script src="src/script.js"></script>
+    <link rel="stylesheet" href="src/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">  
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 
 <body onload="getAllPokemon()">
-    <div class="pokemon-container d-none">
+    <div id="pokemon-container" class="pokemon-container d-none">
 
         <div class="info-top-container">
-            <img class="pokemon-image" id="pokemon-image">
+            <img onclick="backToAllPkm()" class="arrow-back-to-all" src="img/arrow_left.png">
+            <img class="pokemon-image" id="pokemon-image" }>
         </div>
         <h1 class="pokemon-name" id="pokemon-name"></h1>
-        <div class="first-pkm-type-container" id="first-pkm-type">
+        <div class="first-pkm-type-container" id="pkm-type">
 
         </div>
-        <div clas="second-pkm-type-container" id="secons-pkm-type">
+       
 
-        </div>
         <!--Pokemon weight and Pokemon height-->
         <div class="pkm-weight-height-container">
             <div class="pkm-weight-height">
@@ -40,79 +43,79 @@
         <!--Pokemon Base Stats-->
         <div class="base-stats-container">
             <h2>Base Stats</h2>
-                    <!--Heath Points Stat-->
+            <!--Heath Points Stat-->
             <div class="base-stat">
                 <div class="stats-font">
-                <h5>HP</h5>
+                    <h5>HP</h5>
                 </div>
                 <div class="progress">
-                    <div id="hp-progress-bar" id class="progress-bar bg-danger" role="progressbar" style="width: 50%" aria-valuenow="25"
-                        aria-valuemin="0" aria-valuemax="100">
+                    <div id="hp-progress-bar" id class="progress-bar bg-danger" role="progressbar" style="width: 50%"
+                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                     </div>
                 </div>
             </div>
-                    <!--Attack Stat-->
+            <!--Attack Stat-->
             <div class="base-stat">
                 <div class="stats-font">
-                <h5>ATK</h5>
+                    <h5>ATK</h5>
                 </div>
                 <div class="progress">
-                    <div id="atk-progress-bar" class="progress-bar bg-warning" role="progressbar" style="width: 50%" aria-valuenow="25"
-                        aria-valuemin="0" aria-valuemax="100">
+                    <div id="atk-progress-bar" class="progress-bar bg-warning" role="progressbar" style="width: 50%"
+                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                     </div>
                 </div>
             </div>
-                    <!--Defense Stat-->
+            <!--Defense Stat-->
             <div class="base-stat">
                 <div class="stats-font">
-                <h5>DEF</h5>
+                    <h5>DEF</h5>
                 </div>
                 <div class="progress">
-                    <div id="def-progress-bar" class="progress-bar " role="progressbar" style="width: 50%" aria-valuenow="25"
-                        aria-valuemin="0" aria-valuemax="100">
+                    <div id="def-progress-bar" class="progress-bar " role="progressbar" style="width: 50%"
+                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                     </div>
                 </div>
             </div>
-                    <!--Speed Stat-->
+            <!--Speed Stat-->
             <div class="base-stat">
                 <div class="stats-font">
-                <h5>SPD</h5>
+                    <h5>SPD</h5>
                 </div>
                 <div class="progress">
-                    <div id="spd-progress-bar" class="progress-bar bg-stats-spd" role="progressbar" style="width: 50%" aria-valuenow="25"
-                        aria-valuemin="0" aria-valuemax="100">
+                    <div id="spd-progress-bar" class="progress-bar bg-stats-spd" role="progressbar" style="width: 50%"
+                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                     </div>
                 </div>
             </div>
-                    <!--Experience Stat-->
+            <!--Experience Stat-->
             <div class="base-stat">
                 <div class="stats-font">
-                <h5>EXP</h5>
+                    <h5>EXP</h5>
                 </div>
                 <div class="progress">
-                    <div id="exp-progress-bar" class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="25"
-                        aria-valuemin="0" aria-valuemax="100">
+                    <div id="exp-progress-bar" class="progress-bar bg-success" role="progressbar" style="width: 50%"
+                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                     </div>
                 </div>
             </div>
 
         </div>
     </div>
-            <!--Alle .... Pokemon werden geladen-->
+    <!--Alle .... Pokemon werden geladen-->
 
-</div>   
-    <div>
-        <div class="pokedex-head">
+    </div>
+    <div class="" id="showPokedex">
+        <div class="pokedex-head ">
             <h1>Pokedex</h1>
         </div>
-        <div class="dd">
+        <div class="first-grey-bar">
         </div>
-        <div class="ee">
-            <div class="ff">
+        <div class="second-grey-bar-container">
+            <div class="grey-bar-font">
                 <b>First 150 Pokemon</b>
             </div>
         </div>
-        <div class="ss " id="all-pokemon">
+        <div class="show-all-pkm" id="all-pokemon">
 
         </div>
     </div>
